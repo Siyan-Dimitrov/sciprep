@@ -26,6 +26,22 @@ See:
 - [Architecture decision record](docs/decisions/0001-pilot-architecture.md)
 - [Original build specification](gamsat_science_app_agent_spec.md)
 
+## Local development
+
+Prerequisites: Node.js 22+ and npm 10+.
+
+```bash
+npm install
+npm run dev
+```
+
+Quality gates:
+
+```bash
+npm run check
+npm run audit:prod
+```
+
 ## Independence and content policy
 
 SciPrep is not affiliated with, endorsed by, or authorised by ACER. Official,
@@ -33,4 +49,3 @@ purchased, leaked, or recalled GAMSAT questions must never be added to the
 repository, pasted into an AI service, or used as source material. Pilot content
 must be original, attributable, versioned, and clearly marked as unreviewed until
 it completes the required review process.
-
