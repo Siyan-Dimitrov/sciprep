@@ -1,80 +1,118 @@
 # Implementation plan
 
-Status: proposed pilot plan  
+Status: confirmed course-first private-pilot direction
 Last updated: 28 July 2026
 
 ## Outcome
 
-Build a responsive, accessible web application that helps a learner identify
-the scientific model in an unfamiliar stimulus, act on the relevant
-information, receive a diagnosis of their reasoning error, and practise the
-right follow-up activity.
+Build a responsive, accessible chemistry and physics foundation course for
+adults with little or no recent science background. It should provide the
+structure, explanation, guided practice, continuity, and cumulative depth of a
+well-taught introductory university course in an app format.
 
-The first milestone is a working vertical slice with real persistence. It is
-not a throwaway mock-up and it is not the full content-heavy commercial MVP
-described in the source specification.
+The course prepares learners for later GAMSAT scientific reasoning, but it is
+not organised as a question bank. Questions support predictions, guided
+practice, retrieval, and assessment. Teaching and conceptual development are
+the main experience.
 
-## Assumed pilot
+## Confirmed product decisions
 
-Until product decisions are confirmed, implementation assumes:
+- Release: private pilot.
+- Primary learner: non-science adult.
+- Initial subjects: chemistry and physics, supported by scientific mathematics.
+- Content workflow: Git-first is acceptable for the pilot.
+- Conversational AI: deferred.
+- GitHub owner: `Siyan-Dimitrov`.
+- Repository: private `SciPrep`.
+- Product architecture: one modular web application rather than separate
+  learner and admin deployments.
 
-- mixed-background adult learners preparing in the UK;
-- desktop/tablet as the primary passage and test experience, with responsive
-  mobile review;
-- a private GitHub repository named `SciPrep`;
-- repository-authored, schema-validated content as the pilot source of truth;
-- PostgreSQL locally and in hosted environments;
-- authored feedback and deterministic adaptation, with no required LLM;
-- a private pilot before any paid or public launch; and
-- one Next.js application containing learner and protected reviewer routes.
+## Pilot principles
 
-## Scope
+- Assume no recent science but do not simplify the learner's intelligence.
+- Teach prerequisites at the point they become useful.
+- Use concrete and visual models before formal notation.
+- Narrate reasoning choices in worked examples.
+- Make units, graphs, assumptions, and plausibility part of every calculation.
+- Permit prerequisite repair without trapping learners in endless remediation.
+- Track independent and delayed evidence, not reading time alone.
+- Label scientific-review state clearly.
+- Add GAMSAT-style transfer only after the relevant concepts are taught.
 
-### Pilot must have
+## Pilot scope
 
-- onboarding with target date, background, and weekly availability;
-- a short screening diagnostic with confidence capture;
-- a curriculum/evidence view that communicates uncertainty;
-- one complete lesson, worked-example, and passage-question loop;
-- original versioned content, provenance, review state, and schema validation;
-- progressive authored hints and layered explanations;
-- response, timing, option, confidence, and misconception events;
-- deterministic mastery evidence and next-session recommendation;
-- an error log and one mixed timed mini-test;
-- keyboard-accessible, zoom-safe core flows; and
-- automated unit, schema, accessibility, and end-to-end checks.
+### Course experience
+
+- onboarding that captures background, available study time, and target date;
+- a course map showing terms, modules, prerequisites, progress, and workload;
+- a resumable lesson player;
+- visual and interactive explanation blocks;
+- worked examples with progressive reasoning disclosure;
+- guided completion activities and independent checks;
+- contextual glossary, quantities, units, and equation reference;
+- personal notebook entries attached to lessons;
+- delayed review and misconception repair;
+- broad evidence states with an explainable next lesson; and
+- a cross-subject studio combining graphs, units, chemistry, and physics.
+
+### Initial content
+
+- Science Toolkit:
+  - measurement, quantities, and units;
+  - powers of ten and scientific notation;
+  - ratios, proportions, and rates;
+  - tables, coordinate graphs, and change.
+- Chemistry:
+  - matter and particle models;
+  - the mole as a counting unit.
+- Physics:
+  - describing motion;
+  - motion graphs.
+- One cumulative graph and measurement studio.
+
+See [the course blueprint](course-blueprint.md) for the full proposed sequence.
 
 ### Explicitly deferred
 
-- full P0 curriculum coverage and hundreds of production items;
-- a 75-question simulation until the smaller exam engine is reliable;
-- a separate admin application;
-- Redis, queues, and dedicated background workers;
-- conversational AI and AI question generation;
-- IRT, Bayesian knowledge tracing, CAT, and official-score prediction;
-- complex gamification, study groups, and leaderboards; and
-- public self-service authoring.
+- a large standalone question bank;
+- the full 75-question simulation;
+- detailed response-time and endurance coaching;
+- conversational AI and automatic item generation;
+- IRT, CAT, and Bayesian knowledge tracing;
+- a separate non-technical authoring application;
+- Redis, background queues, and dedicated services;
+- public payments or subscriptions; and
+- claims that course progress predicts an official scaled score.
 
-## Architecture
+## App structure
 
 ```text
 apps/
-  web/                    learner + reviewer route groups
+  web/
+    app/
+      (marketing)/
+      (learner)/
+        today/
+        course/
+        learn/[lessonId]/
+        studios/
+        review/
+        notebook/
+        reference/
+        progress/
+      (reviewer)/
 packages/
-  domain/                 scoring, mastery evidence, review states
-  content-schema/         content and provenance schemas
-  adaptive-engine/        deterministic recommendation rules
-  exam-engine/            test assembly, timer, navigation, snapshots
-  ui/                     shared accessible components and tokens
+  content-schema/       versioned course and provenance contracts
+  course-engine/        ordering, prerequisites, completion, resume
+  learning-engine/      evidence, review scheduling, recommendations
+  interactive-models/   reusable graphs, quantities, and simulations
+  ui/                   accessible components and design tokens
 content/
-  knowledge-components/
+  courses/
+  modules/
   lessons/
-  passages/
-  items/
+  studios/
   sources/
-docs/
-  decisions/
-  content-authoring/
 infrastructure/
   migrations/
 ```
@@ -82,158 +120,227 @@ infrastructure/
 Planned stack:
 
 - Next.js, React, TypeScript, and Tailwind CSS;
-- Zod for boundaries and content validation;
+- Zod for content and API boundary validation;
 - PostgreSQL with Drizzle ORM and SQL migrations;
-- Auth.js or an equivalent provider adapter after identity requirements are
-  confirmed;
-- Vitest for domain/schema tests and Playwright for critical user flows;
+- authentication selected when the private-pilot access model is confirmed;
+- Vitest for domain/content tests and Playwright for learner flows;
 - Docker Compose for local PostgreSQL; and
-- GitHub Actions for install, lint, type check, unit tests, content validation,
-  accessibility checks, and an end-to-end smoke test.
+- GitHub Actions for lint, type check, tests, content validation, production
+  audit, accessibility, and a browser smoke test.
 
-Redis, object storage, and a worker are added only when measured workload or
-deployment constraints require them.
+## Course content model
 
-## Sources of truth
+```text
+Course
+  -> Term
+    -> Module
+      -> Lesson
+        -> LessonBlock
+          - purpose
+          - prediction
+          - explanation
+          - visual_model
+          - worked_example
+          - guided_practice
+          - independent_check
+          - summary
+          - next_connection
+    -> Studio
+```
 
-- Git holds authored pilot content and review metadata.
-- Only `approved` content can be materialised into the delivery database.
-- Published content is immutable; corrections produce a new version.
-- Every response references the exact item and passage versions shown.
-- Test forms store their configuration and ordered item-version identifiers.
-- Algorithms and exam rules have explicit versions.
-- Attempts retain a display snapshot sufficient for later audit even if content
-  is retired.
+Each lesson version records:
 
-## Minimum domain model
+- objectives and prerequisites;
+- estimated active time;
+- vocabulary and quantities introduced;
+- content blocks and accessible alternatives;
+- worked-example calculations and validation method;
+- misconception warnings;
+- review and provenance records;
+- independent-check evidence mappings; and
+- links to later lessons that reuse the model.
 
-The source specification's entity list is extended with:
+Git is the source of truth for pilot content. Approved versions are
+materialised into the database. Learner progress always references the exact
+version studied, while corrections produce new immutable versions.
 
-- `exam_config_versions`;
-- `algorithm_versions`;
-- `roles`, `review_assignments`, and `review_decisions`;
-- `content_provenance` and `content_asset_licences`;
-- `audit_log`;
-- `privacy_requests`;
-- `item_display_snapshots`; and
-- timing-quality fields for active time, wall time, pauses, and visibility loss.
+## Minimum learner data model
 
-The pilot does not need every final table on day one. Migrations will follow the
-vertical slice and preserve forward-compatible identifiers.
+- `users` and `learner_profiles`;
+- `course_enrolments`;
+- `course_versions`, `term_versions`, `module_versions`, and `lesson_versions`;
+- `lesson_block_versions`;
+- `lesson_progress` and resumable block position;
+- `learning_attempts` and `checkpoint_responses`;
+- `knowledge_components` and prerequisite edges;
+- `evidence_events` and `concept_evidence_states`;
+- `review_schedule`;
+- `notebook_entries`;
+- `glossary_terms`, `quantities`, `units`, and `equations`;
+- `content_sources`, `content_provenance`, and asset licences;
+- `review_assignments` and `review_decisions`;
+- `algorithm_versions`, `audit_log`, and `privacy_requests`; and
+- `exam_config_versions` for later exam-linked experiences.
+
+## Lesson learning loop
+
+```text
+resume context
+  -> purpose and prediction
+  -> visual/concrete model
+  -> short teaching sequence
+  -> narrated worked example
+  -> guided completion
+  -> independent check
+  -> summary and learner note
+  -> delayed review
+  -> next lesson or prerequisite repair
+```
+
+The app should remember the learner's block position, completed interactions,
+notes, hint use, and independent-check evidence. It must distinguish lesson
+exposure from demonstrated understanding.
+
+## Evidence model v0
+
+Do not display a false-precision mastery percentage. For each concept, record:
+
+- lesson exposure;
+- guided success;
+- independent success;
+- number and level of hints;
+- representation used: verbal, diagram, graph, table, or equation;
+- delayed-retrieval outcome;
+- recurring misconception code; and
+- prerequisite evidence.
+
+A versioned rule produces:
+
+- `not_started`;
+- `introduced`;
+- `practising`;
+- `independent`;
+- `retained`; or
+- `repair_recommended`.
+
+Recommendations show a plain-language reason. Example:
+
+> Revisit ratios before concentration because the last two guided examples
+> needed denominator hints, and concentration depends on that relationship.
 
 ## Delivery phases
 
-### Phase 0 — research and foundation
+### Phase 0 — foundation and course contracts
 
-- confirm pilot audience, content reviewers, branding, hosting, and privacy
-  jurisdiction;
-- establish repository, CI, workspace, design tokens, and local database;
-- add exam configuration and content/provenance schemas;
-- seed a small knowledge-component graph; and
-- implement validation for schema, references, review state, provenance,
-  options, alt text, and graph cycles.
+- revise product documents around the course-first direction;
+- maintain the repository, quality gates, and versioned exam configuration;
+- add schemas for courses, modules, lessons, blocks, worked examples, studios,
+  and review state;
+- seed the complete curriculum map and the private-pilot subset; and
+- add validation for prerequisites, references, units, equations, accessibility,
+  provenance, and review state.
 
-Exit: clean install plus lint, type check, unit tests, and content validation.
+Exit: the curriculum validates as one acyclic, referentially complete course.
 
-### Phase 1 — end-to-end learning loop
+### Phase 1 — course shell and first lesson
 
-- lesson and worked-example rendering;
-- persistent passage and linked-item interface;
-- response timing, confidence, hints, and option submission;
-- layered feedback and distractor diagnosis;
-- mastery-evidence update and a transparent next recommendation; and
-- one fully original, clearly review-labelled deterministic content set.
+- course map;
+- lesson player with block navigation and resume state;
+- content rendering for purpose, explanation, diagram, worked example, and
+  summary;
+- prediction and guided-completion interactions;
+- notebook and glossary;
+- one complete Science Toolkit lesson; and
+- browser tests for keyboard navigation, resuming, and completing a lesson.
 
-Exit: a learner can finish the loop and the exact content version, response
-events, and recommendation can be reproduced in tests.
+Exit: a learner can finish and resume a coherent lesson, with exposure and
+independent evidence stored separately.
 
-### Phase 2 — screening and planning
+### Phase 2 — Science Toolkit pilot
 
-- onboarding and target date;
-- 12 to 20 item screening diagnostic;
-- evidence-aware profile with no official score implication;
-- study-session planner; and
-- error-log repair queue.
+- first four toolkit lessons;
+- graph and quantity interactions;
+- delayed review queue;
+- broad concept-evidence states;
+- prerequisite repair and next-lesson recommendations; and
+- cumulative graph and measurement studio.
 
-Exit: a new user receives a specific, explainable first plan with visible
-evidence limits.
+Exit: a non-science learner can complete the toolkit slice and apply it to a new
+graph without being shown the method name first.
 
-### Phase 3 — timed mini-test and pilot readiness
+### Phase 3 — chemistry and physics strands
 
-- deterministic mixed-test assembly;
-- timer, navigator, flag/return, unanswered state, and end-only feedback;
-- pace and first/last-third analysis;
-- reviewer workflow through validated pull requests;
-- data export/deletion baseline; and
-- accessibility, security, and content-quality review.
+- particle model and mole lessons;
+- describing motion and motion-graph lessons;
+- reusable equation, unit, graph, and worked-example components;
+- end-of-module assessment; and
+- content review and correction workflow.
 
-Exit: private pilot release with reviewed content and critical end-to-end tests.
+Exit: the learner can move between a physical description, a representation,
+and a simple calculation in both subjects.
 
-### Later product phases
+### Phase 4 — private-pilot readiness
 
-Expand P0 coverage, content analytics, an authoring UI, spaced-review breadth,
-and full-length simulation in that order. Introduce psychometrics only after
-sample size, anchor-item design, and validation justify it. Introduce a grounded
-AI tutor only after approved-content retrieval, privacy, evaluation, and
-escalation policies exist.
+- onboarding, invitation-only authentication, and learner progress;
+- accessibility and mobile/tablet review;
+- privacy export/deletion baseline;
+- content-quality reporting;
+- pilot analytics limited to learning and usability decisions; and
+- independent scientific review of pilot lessons and calculations.
 
-## Mastery evidence v0
+Exit: invited non-science learners can complete the pilot safely, and their
+feedback can guide the next curriculum expansion.
 
-The pilot will not display a precise universal mastery percentage. For each
-knowledge component it will retain:
+### Later
 
-- independent correct/incorrect attempts;
-- hinted correct attempts by highest hint level;
-- timed and untimed attempts;
-- confidence/outcome calibration counts;
-- recency and delayed retrieval evidence;
-- response-time quality and expected-time band; and
-- recurring misconception codes.
+Expand the chemistry and physics sequence, add organic/biochemical connections,
+then build scientific integration studios. Exam-like passages, timing, and
+simulation follow the foundation course. A grounded tutor can be considered
+later, after approved-content retrieval, privacy, evaluation, and cost policies
+exist.
 
-A versioned rule maps sufficient evidence to broad states:
-`insufficient evidence`, `priority gap`, `developing`, `functional`, and
-`stable`. Recommendations must expose their top reasons, for example:
-"Unit conversion is prioritised because two independent attempts were
-incorrect, including one high-confidence error, and it is a prerequisite for
-the next chemistry passage."
+## Quality gates
 
-## Quality and safety gates
+- every equation names quantities and units;
+- every calculation has a deterministic recomputation or independent check;
+- every graph and interactive model has an accessible alternative;
+- every lesson declares prerequisites and does not silently exceed them;
+- every scientific analogy states its limitations;
+- every independent check maps to stated objectives;
+- no lesson can move directly from draft to published;
+- unreviewed private content is visibly labelled;
+- no official, purchased, leaked, recalled, or close-paraphrase exam material;
+- no claimed official score conversion or guaranteed outcome; and
+- learner data collection remains minimal and explainable.
 
-- no official, purchased, leaked, recalled, or close-paraphrase item content;
-- no content can move directly from draft to published;
-- every item has exactly one best answer, distractor rationales, expected
-  timing, provenance, and an accessible representation;
-- numerical questions are deterministically recomputable where feasible;
-- user-facing Markdown, mathematics, and SVG are sanitised;
-- no official scaled-score estimate or guaranteed-outcome marketing;
-- analytics explanations, export, deletion, and retention are designed before
-  public release; and
-- exam configuration is rechecked against ACER before each release.
+## Repository workflow
 
-## Initial commit sequence
+Completed local commits:
 
-1. `document product research and pilot plan`
-2. `scaffold the web workspace and quality gates`
-3. `add content schemas and exam configuration`
-4. `seed the pilot knowledge graph`
-5. `build and test the first learning vertical slice`
+1. `bbfc222 document product research and pilot plan`
+2. `0724864 scaffold web workspace and quality gates`
+3. `af5e156 add content schemas and exam configuration`
 
-Each commit should pass the checks that exist at that point. Pushes will follow
-each coherent commit once the GitHub session and remote are available.
+Next commits:
 
-## Decisions needed from the product owner
+4. `reframe the pilot as a structured science course`
+5. `add course content schemas and curriculum map`
+6. `build the course map and first lesson shell`
 
-1. Is the immediate target a private learner pilot, public free beta, or paid
-   launch, and is there a target date?
-2. Which learner profile is the primary pilot user?
-3. Who will author and independently review biology, chemistry, and physics
-   content? Is any already-reviewed original item bank available?
-4. Is the reduced pilot content acceptable, or is full P0 coverage required
-   before any user trial?
-5. Is conversational AI required in the first release?
-6. Should content remain Git-first for the pilot, or is a non-technical admin
-   editor an immediate requirement?
-7. What hosting budget/provider constraints exist, and are users adults only?
-8. May the repository be private under `Siyan-Dimitrov/SciPrep`, with feature
-   branches and draft pull requests?
+The private GitHub repository will be created as
+`Siyan-Dimitrov/SciPrep` after GitHub CLI authentication is restored. Each
+coherent commit will then be pushed as development proceeds.
 
+## Remaining product questions
+
+These are not blockers for the next foundation work:
+
+1. Is there a target date for inviting the first private learner?
+2. Should the programme be presented as one integrated course or two visible
+   courses, "Chemistry Foundations" and "Physics Foundations," sharing the
+   Science Toolkit?
+3. Will the private pilot be used only by the product owner initially, or by a
+   small group of invited learners?
+4. What hosting budget or preferred provider should guide deployment?
+5. Who could later review pilot chemistry and physics content for scientific
+   correctness?

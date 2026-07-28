@@ -1,27 +1,28 @@
 # SciPrep
 
-SciPrep is an independent, reasoning-first learning application for the
-Biological and Physical Sciences component of GAMSAT.
+SciPrep is an independent, app-based foundation course in chemistry and physics
+for adults with little or no recent science background.
 
 The product is designed to help learners:
 
-- recognise the scientific model inside an unfamiliar stimulus;
-- move between prose, graphs, tables, diagrams, and equations;
-- diagnose prerequisite gaps and recurring reasoning errors;
-- improve pace, confidence calibration, retention, and endurance; and
-- practise with original, reviewed material rather than recalled exam content.
+- build scientific and mathematical foundations without assumed knowledge;
+- understand chemistry and physics through visual models and worked examples;
+- practise each idea through guided interactions before working independently;
+- connect equations, units, graphs, experiments, and physical meaning; and
+- progress from foundation learning to unfamiliar GAMSAT-style applications.
 
 This project is at the research and foundation stage. The first delivery target
-is a small but complete learning loop:
+is a small but complete course-learning loop:
 
 ```text
-onboarding -> screening diagnostic -> lesson -> passage questions
-  -> tiered feedback -> mastery evidence -> recommended next session
+course map -> concept lesson -> visual model -> worked example
+  -> guided practice -> independent check -> review schedule
 ```
 
 See:
 
 - [Product and evidence research](docs/research.md)
+- [Course curriculum blueprint](docs/course-blueprint.md)
 - [Implementation plan](docs/implementation-plan.md)
 - [Architecture decision record](docs/decisions/0001-pilot-architecture.md)
 - [Original build specification](gamsat_science_app_agent_spec.md)

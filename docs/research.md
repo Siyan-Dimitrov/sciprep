@@ -4,16 +4,16 @@ Last reviewed: 28 July 2026
 
 ## Executive finding
 
-The source specification has a strong product thesis: the useful opportunity is
-not another large question bank or passive science textbook. It is a smaller,
-high-trust system that identifies *why* a learner failed to reason through an
-unfamiliar science problem, then assigns the next activity that repairs that
-failure.
+The source specification has a strong reasoning thesis, but the product
+direction is now more explicitly course-first. The opportunity is not another
+large question bank or a passive science textbook. It is a structured,
+high-trust chemistry and physics foundation course that helps a non-science
+learner build the mental models required for later unfamiliar problems.
 
 The specification's current "MVP" is closer to a complete commercial beta.
 Content authoring and scientific review will be a larger constraint than
 software development. The first release should therefore validate one complete
-learning loop with a deliberately small, reviewable content set.
+course-learning loop with a deliberately small, reviewable content set.
 
 ## Current official exam facts
 
@@ -121,16 +121,20 @@ Current providers already advertise very large banks:
 Provider-published counts, prices, and efficacy claims have not been
 independently verified.
 
-The defensible wedge is:
+For the course-first direction, the defensible wedge is:
 
-1. high-trust original content with visible provenance and review state;
-2. diagnosis across prerequisite, representation, model selection, units,
-   distractor susceptibility, timing, and confidence;
-3. the same reasoning skill practised across different scientific contexts;
-4. progressive authored hints and explicit reasoning checkpoints;
-5. transparent, evidence-based readiness indicators rather than a claimed
-   official score conversion; and
-6. a focused study path that is less overwhelming than a volume-first bank.
+1. a coherent curriculum for non-science adults, rather than isolated topic
+   notes or thousands of questions;
+2. high-trust original teaching content with visible provenance and review
+   state;
+3. visual models, narrated worked examples, guided completion, and gradual
+   removal of support;
+4. the same scientific relationship revisited through words, diagrams, graphs,
+   tables, and equations;
+5. transparent progress evidence rather than a claimed official score
+   conversion; and
+6. an eventual bridge from foundations to unfamiliar GAMSAT-style scientific
+   material.
 
 ## Copyright, trademark, and content integrity
 
@@ -181,17 +185,19 @@ This is product-risk research, not legal advice.
 7. **AI scope:** authored explanations and deterministic hints should ship first.
    AI can later add grounded coaching, never publish items autonomously.
 
-## Recommended pilot content
+## Recommended course-first pilot content
 
-- 3 concise lessons and 3 worked examples;
-- 3 original passages with 12 linked questions;
-- 12 to 20 screening diagnostic questions;
-- 1 discrete reasoning drill;
-- 1 mixed 20 to 30 minute mini-test;
-- tiered hints, distractor diagnoses, confidence capture, and an error log; and
-- a thin curriculum strand that crosses biology, chemistry, physics, and
-  representation reasoning.
+- 4 Science Toolkit lessons covering units, scientific notation, ratios, and
+  graphs;
+- 2 chemistry lessons covering particle models and the mole;
+- 2 physics lessons covering descriptions of motion and motion graphs;
+- 1 cumulative graph and measurement studio;
+- predictions, visual models, worked examples, guided completion, independent
+  checks, and delayed review;
+- a contextual glossary, notebook, and reference area; and
+- clear scientific-review state and provenance for every lesson.
 
-The pilot should prove that learners understand and trust the diagnosis and
-that reviewers can safely publish, version, and correct an item. Full P0
-coverage and a full-length simulation follow only after this loop is reliable.
+The pilot should prove that non-science learners understand the explanations,
+feel supported without being patronised, and can transfer a model to a new
+representation. Full curriculum breadth, exam-style passage practice, and a
+full-length simulation follow only after the course-learning loop is reliable.
