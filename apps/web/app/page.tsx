@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { NativeEntryRouter } from "@/components/native-entry-router";
+
 const outcomes = [
   {
     label: "Understand",
@@ -31,6 +33,7 @@ const sessionSteps = [
 export default function Home() {
   return (
     <main>
+      <NativeEntryRouter />
       <nav className="shell nav" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="SciPrep home">
           <span aria-hidden="true">SP</span>
@@ -39,7 +42,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#method">Method</a>
           <a href="#session">Session</a>
-          <Link href="/course">Course</Link>
+          <Link href={{ pathname: "/course/" }}>Course</Link>
           <span className="pilot-pill">Private pilot</span>
         </div>
       </nav>
@@ -59,7 +62,7 @@ export default function Home() {
           reason confidently about unfamiliar science.
         </p>
         <div className="hero-actions">
-          <Link className="button primary" href="/course">
+          <Link className="button primary" href={{ pathname: "/course/" }}>
             Explore the course
           </Link>
           <a className="button secondary" href="#method">

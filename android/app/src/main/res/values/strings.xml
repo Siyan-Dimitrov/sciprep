@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SciPrep</string>
+    <string name="title_activity_main">SciPrep</string>
+    <string name="package_name">com.sciprep.app</string>
+    <string name="custom_url_scheme">com.sciprep.app</string>
+</resources>

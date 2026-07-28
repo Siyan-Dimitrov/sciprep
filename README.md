@@ -11,8 +11,9 @@ The product is designed to help learners:
 - connect equations, units, graphs, experiments, and physical meaning; and
 - progress from foundation learning to unfamiliar GAMSAT-style applications.
 
-This project is at the research and foundation stage. The first delivery target
-is a small but complete course-learning loop:
+The current private-pilot build contains nine complete learning experiences
+across a shared Science Toolkit, chemistry, physics, and an integration studio.
+It implements this course-learning loop:
 
 ```text
 course map -> concept lesson -> visual model -> worked example
@@ -42,6 +43,30 @@ Quality gates:
 npm run check
 npm run audit:prod
 ```
+
+## Android build
+
+The Android app uses Capacitor 8 and packages the static course for offline use.
+With Android Studio's JBR and Android SDK configured:
+
+```powershell
+npm run mobile:sync
+cd android
+.\gradlew.bat assembleDebug
+```
+
+The debug APK is written to
+`android/app/build/outputs/apk/debug/app-debug.apk`.
+
+The learner build includes:
+
+- a structured prerequisite-aware course map;
+- five-block resumable lessons with visual models and narrated examples;
+- independent checks with misconception feedback;
+- on-device progress, lesson position, answers, and private notes;
+- delayed retrieval scheduling and an early-review path;
+- broad, explainable progress labels rather than a predictive exam score; and
+- responsive desktop and mobile navigation.
 
 ## Independence and content policy
 

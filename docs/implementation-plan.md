@@ -315,21 +315,21 @@ exist.
 
 ## Repository workflow
 
-Completed local commits:
+Completed local commits before the working private-pilot build:
 
 1. `bbfc222 document product research and pilot plan`
 2. `0724864 scaffold web workspace and quality gates`
 3. `af5e156 add content schemas and exam configuration`
 
-Next commits:
+4. `65e6ffb reframe the pilot as a structured science course`
+5. `165da8c add course outline and curriculum preview`
 
-4. `reframe the pilot as a structured science course`
-5. `add course content schemas and curriculum map`
-6. `build the course map and first lesson shell`
+The current working implementation adds all nine pilot experiences, the
+course/lesson/review/notebook/progress loop, on-device persistence, responsive
+navigation, static export, and Android packaging with Capacitor.
 
-The private GitHub repository will be created as
-`Siyan-Dimitrov/SciPrep` after GitHub CLI authentication is restored. Each
-coherent commit will then be pushed as development proceeds.
+At the product owner's request, GitHub creation and pushing are deferred. The
+eventual target remains the private `Siyan-Dimitrov/SciPrep` repository.
 
 ## Remaining product questions
 

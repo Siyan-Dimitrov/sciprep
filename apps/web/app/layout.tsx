@@ -3,6 +3,7 @@ import { DM_Sans, Newsreader } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "./globals.css";
+import "./learner.css";
 
 const bodyFont = DM_Sans({
   subsets: ["latin"],
@@ -15,9 +16,16 @@ const displayFont = Newsreader({
 });
 
 export const metadata: Metadata = {
+  applicationName: "SciPrep",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "SciPrep",
+  },
+  manifest: "/manifest.webmanifest",
   title: "SciPrep — Science reasoning, made visible",
   description:
-    "A reasoning-first learning companion for GAMSAT Biological and Physical Sciences.",
+    "A structured chemistry and physics foundation course for non-science learners.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
@@ -29,4 +37,3 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     </html>
   );
 }
-
