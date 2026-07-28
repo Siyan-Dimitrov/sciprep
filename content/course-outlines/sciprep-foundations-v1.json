@@ -1,0 +1,189 @@
+{
+  "id": "course.sciprep.foundations",
+  "version": 1,
+  "title": "SciPrep Chemistry and Physics Foundations",
+  "audience": "Adults with little or no recent science background who want a structured route into chemistry and physics.",
+  "description": "A course-first path from scientific quantities and representations to introductory chemistry, physics, and integrated scientific reasoning.",
+  "release": "private_pilot",
+  "stages": [
+    {
+      "id": "stage.science_toolkit",
+      "order": 0,
+      "title": "Science Toolkit",
+      "discipline": "cross_cutting",
+      "description": "Build the mathematical and representational language used throughout chemistry and physics.",
+      "modules": [
+        {
+          "id": "module.toolkit.quantities",
+          "order": 1,
+          "title": "Quantities and relationships",
+          "description": "Learn to describe measurements, scale, comparison, and change.",
+          "lessons": [
+            {
+              "id": "lesson.toolkit.measurement_units",
+              "order": 1,
+              "title": "Measurement, quantities, and units",
+              "estimatedMinutes": 25,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": []
+            },
+            {
+              "id": "lesson.toolkit.scientific_notation",
+              "order": 2,
+              "title": "Powers of ten and scientific notation",
+              "estimatedMinutes": 25,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.measurement_units"
+              ]
+            },
+            {
+              "id": "lesson.toolkit.ratios_rates",
+              "order": 3,
+              "title": "Ratios, proportions, and rates",
+              "estimatedMinutes": 30,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.measurement_units"
+              ]
+            },
+            {
+              "id": "lesson.toolkit.graphs_change",
+              "order": 4,
+              "title": "Tables, graphs, and change",
+              "estimatedMinutes": 35,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.scientific_notation",
+                "lesson.toolkit.ratios_rates"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.chemistry_foundations",
+      "order": 1,
+      "title": "Chemistry Foundations",
+      "discipline": "chemistry",
+      "description": "Use particle models and chemical amount to explain and calculate what matter is doing.",
+      "modules": [
+        {
+          "id": "module.chemistry.particles_amount",
+          "order": 1,
+          "title": "Particles and amount",
+          "description": "Move from observable matter to particles, atoms, and the mole.",
+          "lessons": [
+            {
+              "id": "lesson.chemistry.particle_models",
+              "order": 1,
+              "title": "Matter and particle models",
+              "estimatedMinutes": 30,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.measurement_units"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.mole",
+              "order": 2,
+              "title": "The mole as a counting unit",
+              "estimatedMinutes": 35,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.scientific_notation",
+                "lesson.toolkit.ratios_rates",
+                "lesson.chemistry.particle_models"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.physics_foundations",
+      "order": 2,
+      "title": "Physics Foundations",
+      "discipline": "physics",
+      "description": "Describe motion as measurable change and connect physical stories to graphs.",
+      "modules": [
+        {
+          "id": "module.physics.motion",
+          "order": 1,
+          "title": "Describing motion",
+          "description": "Build a precise language for position, speed, velocity, and change.",
+          "lessons": [
+            {
+              "id": "lesson.physics.describing_motion",
+              "order": 1,
+              "title": "Describing motion",
+              "estimatedMinutes": 30,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.measurement_units",
+                "lesson.toolkit.ratios_rates"
+              ]
+            },
+            {
+              "id": "lesson.physics.motion_graphs",
+              "order": 2,
+              "title": "Motion graphs",
+              "estimatedMinutes": 35,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.graphs_change",
+                "lesson.physics.describing_motion"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.integration",
+      "order": 3,
+      "title": "Integration Studio",
+      "discipline": "integrated",
+      "description": "Use measurement and graph models in a new context spanning chemistry and physics.",
+      "modules": [
+        {
+          "id": "module.integration.graph_measurement",
+          "order": 1,
+          "title": "Graph and measurement studio",
+          "description": "Apply quantities, scale, proportional reasoning, and graphs without a named method.",
+          "lessons": [
+            {
+              "id": "lesson.integration.graph_measurement_studio",
+              "order": 1,
+              "title": "Graph and measurement studio",
+              "estimatedMinutes": 45,
+              "deliveryStatus": "planned",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.mole",
+                "lesson.physics.motion_graphs"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reviewState": "draft",
+  "provenance": {
+    "createdBy": "sciprep.product",
+    "createdAt": "2026-07-28",
+    "generationMethod": "ai_assisted",
+    "sourceIds": [
+      "src.acer.2026.booklet",
+      "src.openstax.chemistry_2e",
+      "src.openstax.college_physics_2e"
+    ],
+    "independentCreationAttested": true,
+    "similarityScreen": {
+      "status": "not_run"
+    }
+  },
+  "reviewHistory": []
+}
+

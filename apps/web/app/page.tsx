@@ -1,29 +1,31 @@
+import Link from "next/link";
+
 const outcomes = [
   {
-    label: "Model",
-    title: "See what the question is really testing",
+    label: "Understand",
+    title: "Build the model before learning the formula",
     description:
-      "Translate a dense stimulus into the relationship, mechanism, or comparison that matters.",
+      "Start with particles, motion, forces, and change in plain language, then connect them to diagrams and symbols.",
   },
   {
-    label: "Reason",
-    title: "Practise the decision, not the surface story",
+    label: "Practise",
+    title: "Move from guided examples to independence",
     description:
-      "Meet the same reasoning skill across biology, chemistry, physics, graphs, tables, and equations.",
+      "See why each step is chosen, complete the next step yourself, and gradually work without scaffolding.",
   },
   {
-    label: "Repair",
-    title: "Learn why an answer felt plausible",
+    label: "Connect",
+    title: "Use one idea in many representations",
     description:
-      "Turn slow answers, high-confidence errors, and recurring distractors into focused follow-up work.",
+      "Carry the same relationship through words, experiments, tables, graphs, equations, and unfamiliar contexts.",
   },
 ];
 
 const sessionSteps = [
-  ["01", "Orient", "A two-minute retrieval check"],
-  ["02", "Learn", "One concise model and worked example"],
-  ["03", "Transfer", "An unfamiliar passage with linked questions"],
-  ["04", "Reflect", "Confidence, feedback, and a faster route"],
+  ["01", "Predict", "Start from what you currently think"],
+  ["02", "Understand", "Explore one visual, concrete model"],
+  ["03", "Work", "Follow a narrated example step by step"],
+  ["04", "Apply", "Move from guided practice to an independent check"],
 ];
 
 export default function Home() {
@@ -37,6 +39,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#method">Method</a>
           <a href="#session">Session</a>
+          <Link href="/course">Course</Link>
           <span className="pilot-pill">Private pilot</span>
         </div>
       </nav>
@@ -44,49 +47,51 @@ export default function Home() {
       <section className="hero shell" id="top">
         <div className="eyebrow">
           <span aria-hidden="true" />
-          Biological &amp; Physical Sciences
+          Chemistry + physics for non-science learners
         </div>
         <h1>
-          Don&apos;t memorise the passage.
-          <em>Find the model inside it.</em>
+          Build the science foundation you were expected to already have.
+          <em>One idea at a time.</em>
         </h1>
         <p className="hero-copy">
-          SciPrep is a reasoning-first study companion that helps you recognise
-          the science, choose the useful information, and repair the exact
-          thinking pattern that cost you the mark.
+          SciPrep is a structured, app-based course that takes you from units,
+          graphs, and particles through the chemistry and physics needed to
+          reason confidently about unfamiliar science.
         </p>
         <div className="hero-actions">
-          <a className="button primary" href="#session">
-            Preview a study loop
-          </a>
+          <Link className="button primary" href="/course">
+            Explore the course
+          </Link>
           <a className="button secondary" href="#method">
             Read the approach
           </a>
         </div>
-        <div className="exam-facts" aria-label="Current exam configuration">
+        <div className="exam-facts" aria-label="Course stages">
           <p>
-            <strong>75</strong>
-            <span>questions</span>
+            <strong>01</strong>
+            <span>science toolkit</span>
           </p>
           <p>
-            <strong>150</strong>
-            <span>minutes</span>
+            <strong>02</strong>
+            <span>chemistry</span>
           </p>
           <p>
-            <strong>40 · 40 · 20</strong>
-            <span>chem · bio · physics</span>
+            <strong>03</strong>
+            <span>physics</span>
           </p>
           <p>
-            <strong>0</strong>
-            <span>calculator</span>
+            <strong>04</strong>
+            <span>integration studios</span>
           </p>
         </div>
       </section>
 
       <section className="method shell" id="method" aria-labelledby="method-heading">
         <div className="section-heading">
-          <p>Built around transfer</p>
-          <h2 id="method-heading">Practice the thinking that travels.</h2>
+          <p>Built as a course</p>
+          <h2 id="method-heading">
+            University-level structure without assumed science.
+          </h2>
         </div>
         <div className="outcome-grid">
           {outcomes.map((outcome) => (
@@ -102,14 +107,14 @@ export default function Home() {
       <section className="session-section" id="session" aria-labelledby="session-heading">
         <div className="shell session-grid">
           <div className="session-intro">
-            <p className="kicker">A session with a reason</p>
+            <p className="kicker">A lesson with a rhythm</p>
             <h2 id="session-heading">
-              Every activity earns its place in the next one.
+              Every step prepares you for the next conceptual jump.
             </h2>
             <p>
-              Your plan is shaped by recent errors, delayed retention,
-              confidence, pace, prerequisite importance, and time to the exam.
-              The recommendation always tells you why it was made.
+              Lessons begin with an intuition, make the science visible, and
+              introduce formal language only when it has something useful to
+              describe. Support fades as your understanding grows.
             </p>
           </div>
           <ol className="session-list">
@@ -128,11 +133,12 @@ export default function Home() {
 
       <section className="principle shell">
         <blockquote>
-          “Correct but slow, heavily hinted, or quickly forgotten is useful
-          evidence—not failure.”
+          “You do not need a science degree to think scientifically. You need a
+          clear path into the ideas.”
         </blockquote>
         <p>
-          The pilot reports readiness evidence, not an invented official score.
+          The private pilot starts with the Science Toolkit, then opens chemistry
+          and physics in a deliberate sequence.
         </p>
       </section>
 
@@ -141,9 +147,8 @@ export default function Home() {
           Independent preparation. Not affiliated with, endorsed by, or
           authorised by ACER.
         </p>
-        <p>Original content only · Evidence over volume</p>
+        <p>Structured foundations · Original content · Evidence over volume</p>
       </footer>
     </main>
   );
 }
-

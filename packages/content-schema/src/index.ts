@@ -19,4 +19,11 @@ export {
   type KnowledgeComponent,
   type ReviewState,
 } from "./content.js";
-
+export {
+  courseOutlineSchema,
+  lessonBlockSchema,
+  lessonSchema,
+  type CourseOutline,
+  type Lesson,
+  type LessonBlock,
+} from "./course.js";

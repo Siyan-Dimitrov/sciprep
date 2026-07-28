@@ -9,10 +9,12 @@ import {
   knowledgeComponentSchema,
   type KnowledgeComponent,
 } from "./content.js";
+import { courseOutlineSchema } from "./course.js";
 
 type ValidationTarget =
   | { kind: "exam_config"; path: string }
-  | { kind: "knowledge_components"; path: string };
+  | { kind: "knowledge_components"; path: string }
+  | { kind: "course_outline"; path: string };
 
 async function listJsonFiles(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -35,6 +37,10 @@ function classify(contentRoot: string, path: string): ValidationTarget | undefin
 
   if (directory === "knowledge-components") {
     return { kind: "knowledge_components", path };
+  }
+
+  if (directory === "course-outlines") {
+    return { kind: "course_outline", path };
   }
 
   return undefined;
@@ -61,7 +67,9 @@ async function main(): Promise<void> {
     const schema =
       target.kind === "exam_config"
         ? examConfigVersionSchema
-        : z.array(knowledgeComponentSchema);
+        : target.kind === "knowledge_components"
+          ? z.array(knowledgeComponentSchema)
+          : courseOutlineSchema;
     const result = schema.safeParse(raw);
 
     if (!result.success) {
@@ -112,4 +120,3 @@ async function main(): Promise<void> {
 }
 
 await main();
-
