@@ -61,7 +61,7 @@ The debug APK is written to
 The learner build includes:
 
 - a structured prerequisite-aware course map;
-- five-block resumable lessons with visual models and narrated examples;
+- 12–15 block resumable lessons with visual models and narrated examples;
 - independent checks with misconception feedback;
 - on-device progress, lesson position, answers, and private notes;
 - delayed retrieval scheduling and an early-review path;

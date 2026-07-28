@@ -37,7 +37,7 @@ export default function CoursePage() {
         </div>
         <div>
           <span>Typical lesson</span>
-          <strong>20–35 min</strong>
+          <strong>12–15 min</strong>
           <p>Stop and resume at any block</p>
         </div>
         <div>

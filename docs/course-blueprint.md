@@ -157,7 +157,9 @@ new prerequisite content.
 
 ## Lesson anatomy
 
-A typical 20–35 minute lesson contains:
+A typical 12–15 minute core lesson contains the following sequence. Integration
+studios are longer; future workshops may combine several core lessons into a
+30–45 minute session.
 
 1. **Purpose:** one concrete reason the idea matters.
 2. **Prediction:** a low-stakes question that exposes the learner's current
@@ -245,4 +247,3 @@ expertise. A reviewer verifies:
 
 Software validation can catch structure, missing fields, invalid references, and
 recomputable arithmetic. It cannot replace subject-matter review.
-
