@@ -12,6 +12,13 @@ test-results/
 .env.*
 !.env.example
 
+# Android release signing. The upload key and its passwords must never enter
+# the repository - losing control of them means anyone can publish an update
+# to com.sciprep.app. See android/app/keystore.properties.example.
+keystore.properties
+*.jks
+*.keystore
+
 # Editors and operating systems
 .DS_Store
 Thumbs.db
@@ -23,3 +30,13 @@ Thumbs.db
 *.sqlite
 *.sqlite3
 *.tsbuildinfo
+
+# Third-party exam material must never enter the repository (see README,
+# "Independence and content policy"). Purchased ACER papers also carry a
+# personal watermark - name, date of birth, email - so committing one would
+# publish personal data as well as licensed content. Better still: keep these
+# outside the working tree entirely.
+*.pdf
+
+# Written into the repository root by browser-automation sessions.
+.playwright-mcp/
