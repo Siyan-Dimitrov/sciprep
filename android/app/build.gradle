@@ -1,5 +1,34 @@
 apply plugin: 'com.android.application'
 
+// Name build outputs after the product rather than the generic "app", so an
+// APK is identifiable once it has been copied off the build directory.
+base {
+    archivesName = "sciprep"
+}
+
+// Versioning and release signing are driven by two properties files that sit
+// beside this build script:
+//   version.properties  - committed; the single source of truth for the version
+//   keystore.properties - gitignored; absent on fresh clones and on CI
+def loadProperties(File propertiesFile) {
+    def props = new Properties()
+    propertiesFile.withInputStream { props.load(it) }
+    return props
+}
+
+def versionPropertiesFile = file('version.properties')
+if (!versionPropertiesFile.exists()) {
+    throw new GradleException("android/app/version.properties is missing; it is the single source of truth for versionCode and versionName.")
+}
+def versionProperties = loadProperties(versionPropertiesFile)
+
+def keystorePropertiesFile = file('keystore.properties')
+def hasReleaseKeystore = keystorePropertiesFile.exists()
+def keystoreProperties = hasReleaseKeystore ? loadProperties(keystorePropertiesFile) : null
+if (!hasReleaseKeystore) {
+    logger.lifecycle("android/app/keystore.properties not found: release artifacts will be UNSIGNED. They are never signed with the debug key. See docs/RELEASE.md.")
+}
+
 android {
     namespace = "com.sciprep.app"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -7,8 +36,8 @@ android {
         applicationId "com.sciprep.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode versionProperties['versionCode'].toInteger()
+        versionName versionProperties['versionName']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,10 +45,24 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        if (hasReleaseKeystore) {
+            release {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Deliberately null when there is no keystore: an unsigned artifact
+            // is a loud, obvious failure at upload time, whereas a debug-signed
+            // one looks fine locally and can never be published.
+            signingConfig = hasReleaseKeystore ? signingConfigs.release : null
         }
     }
 }
