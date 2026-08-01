@@ -11,30 +11,32 @@ import type {
   WorkedBlock,
 } from "@/lib/course-content";
 
+import { notation } from "@/components/notation";
+
 import { ConceptVisual } from "./concept-visual";
 import { useLearner } from "./learner-provider";
 
 function WorkedExample({ block }: { block: WorkedBlock }) {
   return (
     <div className="worked-example">
-      <p className="worked-scenario">{block.scenario}</p>
+      <p className="worked-scenario">{notation(block.scenario)}</p>
       <ol>
         {block.steps.map((step) => (
           <li key={step.label}>
-            <span>{step.label}</span>
+            <span>{notation(step.label)}</span>
             <div>
-              <p>{step.decision}</p>
-              <code>{step.working}</code>
+              <p>{notation(step.decision)}</p>
+              <code>{notation(step.working)}</code>
             </div>
           </li>
         ))}
       </ol>
       <div className="worked-answer">
         <span>Answer</span>
-        <strong>{block.answer}</strong>
+        <strong>{notation(block.answer)}</strong>
       </div>
       <p className="plausibility">
-        <strong>Plausibility check:</strong> {block.plausibility}
+        <strong>Plausibility check:</strong> {notation(block.plausibility)}
       </p>
     </div>
   );
@@ -59,7 +61,7 @@ function KnowledgeCheck({
 
   return (
     <div className="knowledge-check">
-      <p className="check-prompt">{block.prompt}</p>
+      <p className="check-prompt">{notation(block.prompt)}</p>
       <div className="check-options" role="group" aria-label="Answer options">
         {block.options.map((option, index) => {
           const optionCorrect = answered && index === block.correctIndex;
@@ -78,7 +80,7 @@ function KnowledgeCheck({
               type="button"
             >
               <span>{String.fromCharCode(65 + index)}</span>
-              {option}
+              {notation(option)}
             </button>
           );
         })}
@@ -86,8 +88,8 @@ function KnowledgeCheck({
       {answered ? (
         <div className={`check-feedback ${correct ? "correct" : "repair"}`} role="status">
           <strong>{correct ? "That model holds." : "Repair the relationship."}</strong>
-          <p>{correct ? block.explanation : block.misconception}</p>
-          {!correct ? <p className="feedback-followup">{block.explanation}</p> : null}
+          <p>{notation(correct ? block.explanation : block.misconception)}</p>
+          {!correct ? <p className="feedback-followup">{notation(block.explanation)}</p> : null}
         </div>
       ) : (
         <p className="check-hint">
@@ -112,9 +114,9 @@ function LessonContent({
     return (
       <div className="lesson-prose">
         {block.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph}>{notation(paragraph)}</p>
         ))}
-        {block.callout ? <div className="equation-callout">{block.callout}</div> : null}
+        {block.callout ? <div className="equation-callout">{notation(block.callout)}</div> : null}
       </div>
     );
   }
@@ -122,9 +124,9 @@ function LessonContent({
   if (block.type === "visual") {
     return (
       <div className="visual-block">
-        <p>{block.introduction}</p>
+        <p>{notation(block.introduction)}</p>
         <ConceptVisual block={block} />
-        <p className="visual-caption">{block.caption}</p>
+        <p className="visual-caption">{notation(block.caption)}</p>
       </div>
     );
   }
@@ -147,12 +149,12 @@ function LessonContent({
     <div className="lesson-summary">
       <ul>
         {block.points.map((point) => (
-          <li key={point}>{point}</li>
+          <li key={point}>{notation(point)}</li>
         ))}
       </ul>
       <div className="transfer-rule">
         <span>Transfer rule</span>
-        <p>{block.transferRule}</p>
+        <p>{notation(block.transferRule)}</p>
       </div>
     </div>
   );
@@ -192,6 +194,7 @@ function ReadyLessonPlayer({
     completedLessonIds,
     setLessonPosition,
     completeLesson,
+    resetLesson,
   } = useLearner();
   const [blockIndex, setBlockIndex] = useState(initialBlockIndex);
   const [answeredBlockIds, setAnsweredBlockIds] = useState<string[]>([]);
@@ -219,6 +222,20 @@ function ReadyLessonPlayer({
   const finish = () => {
     completeLesson(lesson.id);
     router.push("/today");
+  };
+
+  const restart = () => {
+    if (
+      !window.confirm(
+        `Start ${lesson.title} again? This clears your answers and position for this lesson. Your notes are kept.`,
+      )
+    ) {
+      return;
+    }
+    resetLesson(lesson.id);
+    setAnsweredBlockIds([]);
+    setBlockIndex(0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -266,7 +283,7 @@ function ReadyLessonPlayer({
           ) : null}
 
           <p className="block-eyebrow">{block.eyebrow}</p>
-          <h1>{block.title}</h1>
+          <h1>{notation(block.title)}</h1>
           <LessonContent
             block={block}
             lesson={lesson}
@@ -301,6 +318,17 @@ function ReadyLessonPlayer({
               </button>
             )}
           </div>
+          <div className="lesson-reset-row">
+            <button
+              className="button quiet"
+              disabled={blockIndex === 0 && !progress.lessonVisits[lesson.id]}
+              onClick={restart}
+              type="button"
+            >
+              Reset this lesson
+            </button>
+            <Link href={{ pathname: "/progress/" }}>Reset everything</Link>
+          </div>
         </article>
 
         <div className="lesson-rail">
@@ -308,7 +336,7 @@ function ReadyLessonPlayer({
             <span>By the end</span>
             <ul>
               {lesson.objectives.map((objective) => (
-                <li key={objective}>{objective}</li>
+                <li key={objective}>{notation(objective)}</li>
               ))}
             </ul>
           </section>

@@ -28,6 +28,7 @@ type LearnerContextValue = {
   recordCheck: (lessonId: string, blockId: string, correct: boolean) => void;
   saveNote: (lessonId: string, note: string) => void;
   completeReview: (lessonId: string) => void;
+  resetLesson: (lessonId: string) => void;
   resetProgress: () => void;
 };
 
@@ -169,6 +170,31 @@ export function LearnerProvider({ children }: { children: ReactNode }) {
     [update],
   );
 
+  const resetLesson = useCallback(
+    (lessonId: string) => {
+      update((current) => {
+        const {
+          [lessonId]: removedVisit,
+          ...lessonVisits
+        } = current.lessonVisits;
+        const {
+          [lessonId]: removedChecks,
+          ...checkResults
+        } = current.checkResults;
+        const { [lessonId]: removedReview, ...reviews } = current.reviews;
+        void removedVisit;
+        void removedChecks;
+        void removedReview;
+
+        // Notes are the learner's own writing, so a lesson reset leaves them
+        // alone. Only the position, the check answers, and the review schedule
+        // are cleared.
+        return { ...current, lessonVisits, checkResults, reviews };
+      });
+    },
+    [update],
+  );
+
   const resetProgress = useCallback(() => {
     persist(emptyProgress);
     setProgress(emptyProgress);
@@ -184,6 +210,7 @@ export function LearnerProvider({ children }: { children: ReactNode }) {
       recordCheck,
       saveNote,
       completeReview,
+      resetLesson,
       resetProgress,
     }),
     [
@@ -194,6 +221,7 @@ export function LearnerProvider({ children }: { children: ReactNode }) {
       recordCheck,
       saveNote,
       completeReview,
+      resetLesson,
       resetProgress,
     ],
   );

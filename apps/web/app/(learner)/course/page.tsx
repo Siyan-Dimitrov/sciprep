@@ -6,8 +6,17 @@ import { useLearner } from "@/components/learner-provider";
 import {
   courseStages,
   getLesson,
+  pilotLessons,
   prerequisitesAreComplete,
 } from "@/lib/course-content";
+
+const studioCount = pilotLessons.filter(
+  (lesson) => lesson.discipline === "integrated",
+).length;
+const lessonCount = pilotLessons.length - studioCount;
+const lessonMinutes = pilotLessons.map((lesson) => lesson.estimatedMinutes);
+const shortestLesson = Math.min(...lessonMinutes);
+const longestLesson = Math.max(...lessonMinutes);
 
 export default function CoursePage() {
   const { ready, progress, completedLessonIds } = useLearner();
@@ -32,12 +41,14 @@ export default function CoursePage() {
       <section className="pilot-summary-strip" aria-label="Pilot course details">
         <div>
           <span>Private pilot</span>
-          <strong>9 experiences</strong>
-          <p>Eight lessons and one studio</p>
+          <strong>{pilotLessons.length} experiences</strong>
+          <p>
+            {lessonCount} lessons and {studioCount} studios
+          </p>
         </div>
         <div>
           <span>Typical lesson</span>
-          <strong>12–15 min</strong>
+          <strong>{shortestLesson}–{longestLesson} min</strong>
           <p>Stop and resume at any block</p>
         </div>
         <div>

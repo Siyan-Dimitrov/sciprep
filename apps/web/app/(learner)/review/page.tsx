@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { useLearner } from "@/components/learner-provider";
+import { notation } from "@/components/notation";
 import { getLesson } from "@/lib/course-content";
 
 export default function ReviewPage() {
@@ -75,7 +76,7 @@ export default function ReviewPage() {
                 {done && summary?.type === "summary" ? (
                   <div className="review-reveal">
                     <strong>Compare your recall</strong>
-                    <p>{summary.transferRule}</p>
+                    <p>{notation(summary.transferRule)}</p>
                   </div>
                 ) : null}
                 <div className="review-actions">

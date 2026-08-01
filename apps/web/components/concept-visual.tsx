@@ -1,6 +1,60 @@
-import type { VisualBlock } from "@/lib/course-content";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from "react";
+
+import { ExtendedVisual } from "@/components/concept-visual-extended";
+import type { VisualBlock } from "@/lib/lesson-types";
+import { svgNotation } from "@/components/notation";
+
+/**
+ * Diagram labels are authored with Unicode superscripts and subscripts, which
+ * render as empty boxes wherever the font lacks the codepoint. Rewriting the
+ * rendered tree once here converts every label in every renderer, rather than
+ * touching several hundred <text> elements by hand.
+ *
+ * <title> is skipped: it is assistive text, never painted, and tspans are not
+ * valid inside it.
+ */
+function withNotation(node: ReactNode): ReactNode {
+  return Children.map(node, (child) => {
+    if (!isValidElement(child)) {
+      return child;
+    }
+
+    const element = child as ReactElement<{ children?: ReactNode }>;
+    const { children } = element.props;
+
+    if (children === undefined || element.type === "title") {
+      return element;
+    }
+
+    if (element.type === "text" || element.type === "tspan") {
+      if (typeof children === "string") {
+        return cloneElement(element, undefined, svgNotation(children));
+      }
+      if (Array.isArray(children)) {
+        return cloneElement(
+          element,
+          undefined,
+          children.map((part) => (typeof part === "string" ? svgNotation(part) : part)),
+        );
+      }
+      return element;
+    }
+
+    return cloneElement(element, undefined, withNotation(children));
+  });
+}
 
 export function ConceptVisual({ block }: { block: VisualBlock }) {
+  return <>{withNotation(ConceptVisualBase({ block }))}</>;
+}
+
+function ConceptVisualBase({ block }: { block: VisualBlock }) {
   const common = {
     role: "img",
     "aria-label": block.caption,
@@ -245,6 +299,12 @@ export function ConceptVisual({ block }: { block: VisualBlock }) {
         )}
       </svg>
     );
+  }
+
+  if (block.visual !== "studio") {
+    // Called directly rather than as an element so the notation rewrite below
+    // walks a tree of host elements rather than stopping at a component.
+    return ExtendedVisual({ block });
   }
 
   return (
