@@ -11,9 +11,12 @@ The product is designed to help learners:
 - connect equations, units, graphs, experiments, and physical meaning; and
 - progress from foundation learning to unfamiliar GAMSAT-style applications.
 
-The current private-pilot build contains nine complete learning experiences
-across a shared Science Toolkit, chemistry, physics, and an integration studio.
-It implements this course-learning loop:
+The current private-pilot build contains forty complete learning experiences
+across twelve course stages: a shared Science Toolkit, a quantitative reasoning
+toolkit, four chemistry stages running from particle models to organic and
+biological chemistry, three physics stages running from motion to circuits, and
+two stages of integrated reasoning studios. It implements this course-learning
+loop:
 
 ```text
 course map -> concept lesson -> visual model -> worked example
@@ -22,6 +25,8 @@ course map -> concept lesson -> visual model -> worked example
 
 See:
 
+- [Next session handoff](docs/next-session.md) — outstanding gaps, review status,
+  and how to author new lessons
 - [Product and evidence research](docs/research.md)
 - [Course curriculum blueprint](docs/course-blueprint.md)
 - [Implementation plan](docs/implementation-plan.md)
@@ -56,11 +61,15 @@ cd android
 ```
 
 The debug APK is written to
-`android/app/build/outputs/apk/debug/app-debug.apk`.
+`android/app/build/outputs/apk/debug/sciprep-debug.apk`.
 
 The learner build includes:
 
-- a structured prerequisite-aware course map;
+- a structured prerequisite-aware course map across twelve stages;
+- first-year university treatment of atomic structure, bonding, molecular shape,
+  thermodynamics, kinetics, equilibrium, acid–base and redox chemistry, organic
+  reactivity, biological macromolecules, mechanics, fluids, thermal physics,
+  waves, optics, spectroscopy, and electricity;
 - 12–15 block resumable lessons with visual models and narrated examples;
 - independent checks with misconception feedback;
 - on-device progress, lesson position, answers, and private notes;
