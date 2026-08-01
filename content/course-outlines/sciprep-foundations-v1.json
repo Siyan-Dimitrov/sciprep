@@ -1,9 +1,9 @@
 {
   "id": "course.sciprep.foundations",
-  "version": 1,
+  "version": 2,
   "title": "SciPrep Chemistry and Physics Foundations",
   "audience": "Adults with little or no recent science background who want a structured route into chemistry and physics.",
-  "description": "A course-first path from scientific quantities and representations to introductory chemistry, physics, and integrated scientific reasoning.",
+  "description": "A course-first path from scientific quantities and representations through introductory chemistry and physics to integrated scientific reasoning on unfamiliar material.",
   "release": "private_pilot",
   "stages": [
     {
@@ -11,7 +11,7 @@
       "order": 0,
       "title": "Science Toolkit",
       "discipline": "cross_cutting",
-      "description": "Build the mathematical and representational language used throughout chemistry and physics.",
+      "description": "Build the quantities, mathematical relationships, and representations used across both subjects.",
       "modules": [
         {
           "id": "module.toolkit.quantities",
@@ -23,7 +23,7 @@
               "id": "lesson.toolkit.measurement_units",
               "order": 1,
               "title": "Measurement, quantities, and units",
-              "estimatedMinutes": 25,
+              "estimatedMinutes": 12,
               "deliveryStatus": "draft",
               "prerequisiteLessonIds": []
             },
@@ -31,8 +31,8 @@
               "id": "lesson.toolkit.scientific_notation",
               "order": 2,
               "title": "Powers of ten and scientific notation",
-              "estimatedMinutes": 25,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 12,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.measurement_units"
               ]
@@ -41,8 +41,8 @@
               "id": "lesson.toolkit.ratios_rates",
               "order": 3,
               "title": "Ratios, proportions, and rates",
-              "estimatedMinutes": 30,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 15,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.measurement_units"
               ]
@@ -51,8 +51,8 @@
               "id": "lesson.toolkit.graphs_change",
               "order": 4,
               "title": "Tables, graphs, and change",
-              "estimatedMinutes": 35,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 15,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.scientific_notation",
                 "lesson.toolkit.ratios_rates"
@@ -63,11 +63,60 @@
       ]
     },
     {
-      "id": "stage.chemistry_foundations",
+      "id": "stage.toolkit_advanced",
       "order": 1,
+      "title": "Quantitative Reasoning Toolkit",
+      "discipline": "cross_cutting",
+      "description": "Handle logarithmic scales, scaling arguments, and experimental evidence before meeting them inside chemistry and physics.",
+      "modules": [
+        {
+          "id": "module.toolkit.quantitative_reasoning",
+          "order": 1,
+          "title": "Logarithms, scaling, and evidence",
+          "description": "Handle logarithmic scales, proportional scaling arguments, and the design of an experiment.",
+          "lessons": [
+            {
+              "id": "lesson.toolkit.logarithms",
+              "order": 1,
+              "title": "Logarithms, exponentials, and log scales",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.scientific_notation",
+                "lesson.toolkit.graphs_change"
+              ]
+            },
+            {
+              "id": "lesson.toolkit.proportional_reasoning",
+              "order": 2,
+              "title": "Proportional reasoning and limiting cases",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.ratios_rates",
+                "lesson.toolkit.graphs_change"
+              ]
+            },
+            {
+              "id": "lesson.toolkit.experimental_design",
+              "order": 3,
+              "title": "Variables, controls, and causal claims",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.graphs_change"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.chemistry_foundations",
+      "order": 2,
       "title": "Chemistry Foundations",
       "discipline": "chemistry",
-      "description": "Use particle models and chemical amount to explain and calculate what matter is doing.",
+      "description": "Connect visible matter to particle models, chemical amount, and measurable laboratory quantities.",
       "modules": [
         {
           "id": "module.chemistry.particles_amount",
@@ -79,8 +128,8 @@
               "id": "lesson.chemistry.particle_models",
               "order": 1,
               "title": "Matter and particle models",
-              "estimatedMinutes": 30,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 15,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.measurement_units"
               ]
@@ -89,8 +138,8 @@
               "id": "lesson.chemistry.mole",
               "order": 2,
               "title": "The mole as a counting unit",
-              "estimatedMinutes": 35,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 15,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.scientific_notation",
                 "lesson.toolkit.ratios_rates",
@@ -102,11 +151,266 @@
       ]
     },
     {
+      "id": "stage.chemistry_structure",
+      "order": 3,
+      "title": "Atoms, Bonding, and Structure",
+      "discipline": "chemistry",
+      "description": "Explain periodic trends, bonding, molecular shape, and physical properties from electron behaviour.",
+      "modules": [
+        {
+          "id": "module.chemistry.structure_bonding",
+          "order": 1,
+          "title": "Structure and bonding",
+          "description": "Explain periodic trends, bonding types, molecular geometry, and intermolecular forces.",
+          "lessons": [
+            {
+              "id": "lesson.chemistry.atomic_structure",
+              "order": 1,
+              "title": "Atomic structure and periodic trends",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.particle_models",
+                "lesson.toolkit.scientific_notation"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.bonding",
+              "order": 2,
+              "title": "Ionic, covalent, and metallic bonding",
+              "estimatedMinutes": 38,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.atomic_structure"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.molecular_shape",
+              "order": 3,
+              "title": "Molecular shape, hybridisation, and polarity",
+              "estimatedMinutes": 30,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.bonding"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.intermolecular_forces",
+              "order": 4,
+              "title": "Intermolecular forces and physical properties",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.molecular_shape"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.chemistry_reactions",
+      "order": 4,
+      "title": "Energy, Rate, and Equilibrium",
+      "discipline": "chemistry",
+      "description": "Decide whether a reaction releases energy, whether it will happen, how fast it goes, and where it stops.",
+      "modules": [
+        {
+          "id": "module.chemistry.energy_rate_equilibrium",
+          "order": 1,
+          "title": "Energy, rate, and equilibrium",
+          "description": "Quantify reacting amounts, energy change, spontaneity, reaction rate, and equilibrium position.",
+          "lessons": [
+            {
+              "id": "lesson.chemistry.stoichiometry",
+              "order": 1,
+              "title": "Chemical equations, stoichiometry, and yield",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.mole",
+                "lesson.chemistry.intermolecular_forces"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.thermochemistry",
+              "order": 2,
+              "title": "Enthalpy, reaction profiles, and Hess’s law",
+              "estimatedMinutes": 35,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.stoichiometry"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.entropy_gibbs",
+              "order": 3,
+              "title": "Entropy, free energy, and chemical direction",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.thermochemistry"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.kinetics",
+              "order": 4,
+              "title": "Reaction rate, collision models, and catalysis",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.thermochemistry"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.equilibrium",
+              "order": 5,
+              "title": "Dynamic equilibrium and Le Chatelier’s principle",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.kinetics",
+                "lesson.chemistry.entropy_gibbs"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.chemistry_aqueous",
+      "order": 5,
+      "title": "Acids, Bases, and Electron Transfer",
+      "discipline": "chemistry",
+      "description": "Work quantitatively with pH, buffering, titration curves, and the electrochemistry behind redox systems.",
+      "modules": [
+        {
+          "id": "module.chemistry.aqueous_electron_transfer",
+          "order": 1,
+          "title": "Aqueous systems and electron transfer",
+          "description": "Work with pH, weak acid equilibria, buffering, titration curves, and electrochemical cells.",
+          "lessons": [
+            {
+              "id": "lesson.chemistry.acids_bases",
+              "order": 1,
+              "title": "Acids, bases, and the pH scale",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.equilibrium",
+                "lesson.toolkit.logarithms"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.buffers_titration",
+              "order": 2,
+              "title": "Buffers and titration curves",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.acids_bases"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.redox",
+              "order": 3,
+              "title": "Oxidation, reduction, and electrochemical cells",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.acids_bases"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.organic_chemistry",
+      "order": 6,
+      "title": "Organic and Biological Chemistry",
+      "discipline": "chemistry",
+      "description": "Read organic structures, predict reactivity from electron distribution, and carry both into biological molecules.",
+      "modules": [
+        {
+          "id": "module.chemistry.organic_biological",
+          "order": 1,
+          "title": "Organic and biological chemistry",
+          "description": "Read organic structures and reason from electron distribution through to biological macromolecules.",
+          "lessons": [
+            {
+              "id": "lesson.chemistry.organic_structure",
+              "order": 1,
+              "title": "Carbon frameworks and functional groups",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.molecular_shape"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.isomerism",
+              "order": 2,
+              "title": "Isomerism, stereochemistry, and chirality",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.organic_structure"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.organic_acidity",
+              "order": 3,
+              "title": "Acidity and basicity in organic molecules",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.organic_structure",
+                "lesson.chemistry.acids_bases"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.reaction_mechanisms",
+              "order": 4,
+              "title": "Nucleophiles, electrophiles, and reaction patterns",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.organic_acidity"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.biomolecules",
+              "order": 5,
+              "title": "Amino acids, proteins, carbohydrates, and lipids",
+              "estimatedMinutes": 38,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.reaction_mechanisms",
+                "lesson.chemistry.intermolecular_forces"
+              ]
+            },
+            {
+              "id": "lesson.chemistry.separation_techniques",
+              "order": 6,
+              "title": "Separation and analytical techniques",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.intermolecular_forces",
+                "lesson.chemistry.biomolecules"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "stage.physics_foundations",
-      "order": 2,
+      "order": 7,
       "title": "Physics Foundations",
       "discipline": "physics",
-      "description": "Describe motion as measurable change and connect physical stories to graphs.",
+      "description": "Describe motion precisely and move between physical stories, quantities, and graphs.",
       "modules": [
         {
           "id": "module.physics.motion",
@@ -118,8 +422,8 @@
               "id": "lesson.physics.describing_motion",
               "order": 1,
               "title": "Describing motion",
-              "estimatedMinutes": 30,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 15,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.measurement_units",
                 "lesson.toolkit.ratios_rates"
@@ -129,8 +433,8 @@
               "id": "lesson.physics.motion_graphs",
               "order": 2,
               "title": "Motion graphs",
-              "estimatedMinutes": 35,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 15,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.toolkit.graphs_change",
                 "lesson.physics.describing_motion"
@@ -141,11 +445,298 @@
       ]
     },
     {
+      "id": "stage.physics_mechanics",
+      "order": 8,
+      "title": "Forces, Energy, and Fluids",
+      "discipline": "physics",
+      "description": "Explain why motion changes, account for energy through a process, and reason about pressure and flow.",
+      "modules": [
+        {
+          "id": "module.physics.forces_energy_fluids",
+          "order": 1,
+          "title": "Forces, energy, and fluids",
+          "description": "Explain changes in motion, account for energy transfers, and reason about pressure and flow.",
+          "lessons": [
+            {
+              "id": "lesson.physics.forces_newton",
+              "order": 1,
+              "title": "Forces, free-body diagrams, and Newton's laws",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.motion_graphs"
+              ]
+            },
+            {
+              "id": "lesson.physics.work_energy",
+              "order": 2,
+              "title": "Work, energy, power, and efficiency",
+              "estimatedMinutes": 32,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.forces_newton"
+              ]
+            },
+            {
+              "id": "lesson.physics.momentum_circular",
+              "order": 3,
+              "title": "Momentum, impulse, and circular motion",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.work_energy"
+              ]
+            },
+            {
+              "id": "lesson.physics.fluids",
+              "order": 4,
+              "title": "Density, pressure, buoyancy, and flow",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.forces_newton"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.physics_waves_fields",
+      "order": 9,
+      "title": "Thermal, Waves, Light, and Electricity",
+      "discipline": "physics",
+      "description": "Model heat, gases, waves, optical instruments, spectroscopy, and circuits with a shared set of relationships.",
+      "modules": [
+        {
+          "id": "module.physics.thermal_waves_electricity",
+          "order": 1,
+          "title": "Thermal physics, waves, and electricity",
+          "description": "Model heat and gases, wave behaviour, optical systems, spectroscopy, and electric circuits.",
+          "lessons": [
+            {
+              "id": "lesson.physics.thermal",
+              "order": 1,
+              "title": "Temperature, heat, phase change, and gases",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.work_energy",
+                "lesson.chemistry.particle_models"
+              ]
+            },
+            {
+              "id": "lesson.physics.waves",
+              "order": 2,
+              "title": "Oscillations, waves, sound, and resonance",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.motion_graphs"
+              ]
+            },
+            {
+              "id": "lesson.physics.optics",
+              "order": 3,
+              "title": "Light, refraction, lenses, and spectroscopy",
+              "estimatedMinutes": 38,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.waves"
+              ]
+            },
+            {
+              "id": "lesson.physics.electricity",
+              "order": 4,
+              "title": "Charge, current, resistance, and circuits",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.physics.work_energy"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.biology_cell",
+      "order": 10,
+      "title": "Cells, Membranes, and Metabolism",
+      "discipline": "biology",
+      "description": "Treat the cell as a set of compartments, work out what crosses their membranes, and follow the energy that keeps them running.",
+      "modules": [
+        {
+          "id": "module.biology.cell_energy",
+          "order": 1,
+          "title": "Compartments, transport, and energy",
+          "description": "Move from cell structure to the membranes that separate compartments and the metabolism that powers them.",
+          "lessons": [
+            {
+              "id": "lesson.biology.cell_structure",
+              "order": 1,
+              "title": "Cell structure and the secretory pathway",
+              "estimatedMinutes": 34,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.biomolecules"
+              ]
+            },
+            {
+              "id": "lesson.biology.membranes_transport",
+              "order": 2,
+              "title": "Membranes and transport",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.cell_structure",
+                "lesson.chemistry.intermolecular_forces",
+                "lesson.physics.electricity"
+              ]
+            },
+            {
+              "id": "lesson.biology.enzymes",
+              "order": 3,
+              "title": "Enzymes and inhibition",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.kinetics",
+                "lesson.biology.cell_structure"
+              ]
+            },
+            {
+              "id": "lesson.biology.metabolism",
+              "order": 4,
+              "title": "Metabolism and bioenergetics",
+              "estimatedMinutes": 37,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.enzymes",
+                "lesson.chemistry.entropy_gibbs",
+                "lesson.chemistry.redox"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.biology_genetics",
+      "order": 11,
+      "title": "Genetics and Gene Expression",
+      "discipline": "biology",
+      "description": "Read information from sequence to phenotype, and reason about how it is copied, recombined, and distributed through a population.",
+      "modules": [
+        {
+          "id": "module.biology.inheritance",
+          "order": 1,
+          "title": "Information, inheritance, and populations",
+          "description": "Follow genetic information from molecular sequence through individual inheritance to allele frequencies in a population.",
+          "lessons": [
+            {
+              "id": "lesson.biology.dna_expression",
+              "order": 1,
+              "title": "DNA, replication, and gene expression",
+              "estimatedMinutes": 38,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.cell_structure",
+                "lesson.chemistry.biomolecules"
+              ]
+            },
+            {
+              "id": "lesson.biology.mendelian_genetics",
+              "order": 2,
+              "title": "Mendelian genetics and pedigree reasoning",
+              "estimatedMinutes": 35,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.dna_expression"
+              ]
+            },
+            {
+              "id": "lesson.biology.meiosis_linkage",
+              "order": 3,
+              "title": "Meiosis, linkage, and recombination",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.mendelian_genetics"
+              ]
+            },
+            {
+              "id": "lesson.biology.population_genetics",
+              "order": 4,
+              "title": "Population genetics and the Hardy-Weinberg model",
+              "estimatedMinutes": 37,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.mendelian_genetics",
+                "lesson.toolkit.proportional_reasoning"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.biology_physiology",
+      "order": 12,
+      "title": "Signalling, Defence, and Physiology",
+      "discipline": "biology",
+      "description": "Follow information and regulation through a body, from a single receptor to whole-system homeostasis.",
+      "modules": [
+        {
+          "id": "module.biology.regulation",
+          "order": 1,
+          "title": "Signalling, immunity, and homeostasis",
+          "description": "Treat regulation as one architecture, then meet it again in cell signalling, immune defence, and organ systems.",
+          "lessons": [
+            {
+              "id": "lesson.biology.cell_signalling",
+              "order": 1,
+              "title": "Cell signalling and regulation",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.membranes_transport",
+                "lesson.biology.enzymes"
+              ]
+            },
+            {
+              "id": "lesson.biology.immunology",
+              "order": 2,
+              "title": "Immunology and antigenic variation",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.cell_signalling",
+                "lesson.biology.dna_expression"
+              ]
+            },
+            {
+              "id": "lesson.biology.physiology_systems",
+              "order": 3,
+              "title": "Homeostasis and physiological systems",
+              "estimatedMinutes": 37,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.biology.cell_signalling",
+                "lesson.physics.fluids",
+                "lesson.physics.thermal"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "stage.integration",
-      "order": 3,
+      "order": 13,
       "title": "Integration Studio",
       "discipline": "integrated",
-      "description": "Use measurement and graph models in a new context spanning chemistry and physics.",
+      "description": "Choose and connect models without being told which equation or representation to use.",
       "modules": [
         {
           "id": "module.integration.graph_measurement",
@@ -157,11 +748,73 @@
               "id": "lesson.integration.graph_measurement_studio",
               "order": 1,
               "title": "Graph and measurement studio",
-              "estimatedMinutes": 45,
-              "deliveryStatus": "planned",
+              "estimatedMinutes": 18,
+              "deliveryStatus": "draft",
               "prerequisiteLessonIds": [
                 "lesson.chemistry.mole",
                 "lesson.physics.motion_graphs"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.reasoning_studios",
+      "order": 14,
+      "title": "Scientific Reasoning Studios",
+      "discipline": "integrated",
+      "description": "Extract a working model from unfamiliar notation, data, and estimates under realistic constraints.",
+      "modules": [
+        {
+          "id": "module.integration.reasoning_studios",
+          "order": 1,
+          "title": "Scientific reasoning studios",
+          "description": "Extract a working model from unfamiliar notation, unfamiliar data, and incomplete information.",
+          "lessons": [
+            {
+              "id": "lesson.integration.novel_notation_studio",
+              "order": 1,
+              "title": "Novel notation and unfamiliar formalisms",
+              "estimatedMinutes": 38,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.chemistry.organic_structure",
+                "lesson.toolkit.logarithms"
+              ]
+            },
+            {
+              "id": "lesson.integration.data_inference_studio",
+              "order": 2,
+              "title": "Data, graphs, and experimental inference",
+              "estimatedMinutes": 40,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.experimental_design",
+                "lesson.chemistry.kinetics"
+              ]
+            },
+            {
+              "id": "lesson.integration.estimation_studio",
+              "order": 3,
+              "title": "Estimation, orders of magnitude, and limiting cases",
+              "estimatedMinutes": 38,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.toolkit.proportional_reasoning",
+                "lesson.physics.fluids"
+              ]
+            },
+            {
+              "id": "lesson.integration.chart_literacy_studio",
+              "order": 4,
+              "title": "Reading unfamiliar chart types",
+              "estimatedMinutes": 36,
+              "deliveryStatus": "draft",
+              "prerequisiteLessonIds": [
+                "lesson.integration.data_inference_studio",
+                "lesson.toolkit.logarithms",
+                "lesson.toolkit.graphs_change"
               ]
             }
           ]
@@ -172,12 +825,14 @@
   "reviewState": "draft",
   "provenance": {
     "createdBy": "sciprep.product",
-    "createdAt": "2026-07-28",
+    "createdAt": "2026-07-30",
     "generationMethod": "ai_assisted",
     "sourceIds": [
       "src.acer.2026.booklet",
       "src.openstax.chemistry_2e",
-      "src.openstax.college_physics_2e"
+      "src.openstax.college_physics_2e",
+      "src.openstax.organic_chemistry",
+      "src.openstax.biology_2e"
     ],
     "independentCreationAttested": true,
     "similarityScreen": {
@@ -186,4 +841,3 @@
   },
   "reviewHistory": []
 }
-

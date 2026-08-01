@@ -215,22 +215,31 @@ mastery.
 
 ## Private-pilot slice
 
-The first pilot should implement:
+The pilot originally implemented four Science Toolkit lessons, two chemistry
+lessons, two physics lessons, and one cross-subject studio. It has since been
+extended to university-entry depth across twelve stages:
 
-- the first four Science Toolkit lessons;
-- two chemistry lessons: particle models and the mole;
-- two physics lessons: describing motion and motion graphs;
-- one cross-subject graph studio;
-- resumable lesson progress and a course map;
-- prediction, worked-example, guided-practice, and independent-check blocks;
-- a notebook and contextual glossary;
-- a small delayed-review queue; and
-- content provenance plus an explicit `unreviewed`, `reviewed`, or `approved`
-  badge.
+- Science Toolkit and a Quantitative Reasoning Toolkit covering logarithms and
+  log scales, proportional and limiting-case reasoning, and experimental design;
+- chemistry from particle models and the mole through atomic structure, bonding,
+  molecular shape, intermolecular forces, stoichiometry, thermochemistry, entropy
+  and free energy, kinetics, equilibrium, acid–base and buffer chemistry, redox
+  and electrochemistry, and organic chemistry through to biological
+  macromolecules;
+- physics from motion and motion graphs through forces, energy, momentum and
+  circular motion, fluids, thermal physics and gases, waves, optics and
+  spectroscopy, and electric circuits; and
+- integrated studios on unfamiliar notation, experimental inference, and
+  estimation under incomplete information.
+
+Alongside the content the build carries resumable lesson progress and a course
+map, prediction, worked-example, guided-practice, and independent-check blocks,
+a notebook and contextual glossary, a delayed-review queue, and content
+provenance with an explicit `unreviewed`, `reviewed`, or `approved` badge.
 
 This is enough to test whether a non-science learner understands the teaching,
 feels supported without being patronised, and can carry a model into a new
-representation.
+representation. Every lesson remains `unreviewed` until subject-matter review.
 
 ## Content review
 

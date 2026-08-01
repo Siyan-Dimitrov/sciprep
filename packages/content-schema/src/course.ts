@@ -192,7 +192,13 @@ const outlineStageSchema = z.object({
   id: contentIdSchema,
   order: z.number().int().nonnegative(),
   title: z.string().min(1),
-  discipline: z.enum(["cross_cutting", "chemistry", "physics", "integrated"]),
+  discipline: z.enum([
+    "cross_cutting",
+    "chemistry",
+    "physics",
+    "biology",
+    "integrated",
+  ]),
   description: z.string().min(20),
   modules: z.array(outlineModuleSchema).min(1),
 });

@@ -324,9 +324,17 @@ Completed local commits before the working private-pilot build:
 4. `65e6ffb reframe the pilot as a structured science course`
 5. `165da8c add course outline and curriculum preview`
 
-The current working implementation adds all nine pilot experiences, the
-course/lesson/review/notebook/progress loop, on-device persistence, responsive
-navigation, static export, and Android packaging with Capacitor.
+The current working implementation adds forty pilot experiences across twelve
+stages, the course/lesson/review/notebook/progress loop, on-device persistence,
+responsive navigation, static export, and Android packaging with Capacitor.
+
+Lesson content is authored as TypeScript data under `apps/web/lib/lessons/`,
+one module per course stage, with the shared block and lesson types in
+`apps/web/lib/lesson-types.ts`. `apps/web/lib/course-content.ts` assembles those
+modules into the ordered lesson list and the course map, so a new stage is added
+by writing one lesson module and registering it there. Diagram renderers live in
+`apps/web/components/concept-visual.tsx` and its extended companion; every value
+in the `VisualName` union must have a matching branch.
 
 At the product owner's request, GitHub creation and pushing are deferred. The
 eventual target remains the private `Siyan-Dimitrov/SciPrep` repository.
