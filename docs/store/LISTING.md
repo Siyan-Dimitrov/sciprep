@@ -274,9 +274,9 @@ assumed. Regenerate with `node scripts/store-graphics.mjs` and
 `node scripts/store-screenshots.mjs`; both scripts re-measure and exit non-zero
 if anything falls outside the Play limits.
 
-The Android launcher icons are generated from the same mark by
-`node scripts/android-icons.mjs`, so the store icon and the on-device icon
-cannot drift apart.
+The on-device artwork comes from the same mark, so the store icon and the app
+itself cannot drift apart: `node scripts/android-icons.mjs` writes the launcher
+icons and `node scripts/android-splash.mjs` the splash logo.
 
 | File | Measured | Channels | Alpha |
 | --- | --- | --- | --- |

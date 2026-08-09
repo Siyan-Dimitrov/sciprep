@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The launch window background (values/styles.xml, AppTheme.NoActionBarLaunch).
+     A layer-list rather than a bitmap: a bitmap window background is stretched
+     to the window, which turns the circular mark into an ellipse on any screen
+     whose aspect ratio differs from the asset. Here the ground is a flat colour
+     that cannot distort, and the logo is centred at its natural density-scaled
+     size. Regenerate the logo with `node scripts/android-splash.mjs`. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="#15372c" />
+    </item>
+    <item>
+        <bitmap
+            android:src="@drawable/splash_logo"
+            android:gravity="center" />
+    </item>
+</layer-list>

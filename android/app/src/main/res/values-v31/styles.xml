@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12 and later draw their own splash screen at cold start, from
+     windowSplashScreenBackground plus the launcher icon, and ignore the window
+     background the base theme sets. Without this the system splash would use
+     the platform default rather than the brand ground, so the launcher icon
+     would land on white before the app's own splash appeared in brand green.
+     No animated icon is set on purpose: the system then uses the adaptive
+     launcher icon, whose own background is this same colour, so the mark reads
+     as sitting directly on the splash. -->
+<resources>
+
+    <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">#15372c</item>
+        <item name="android:background">@drawable/splash</item>
+    </style>
+</resources>
