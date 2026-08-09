@@ -1,8 +1,9 @@
 # Next session handoff
 
-Last updated: 31 July 2026, after the notation-rendering fix and the Android
-verification pass. Written on top of the earlier note from the same day covering
-the biology strand and the correction pass.
+Last updated: 9 August 2026, when section 10 was added to park the AI-tutor
+question. Before that, 31 July 2026, after the notation-rendering fix and the
+Android verification pass, written on top of the earlier note from the same day
+covering the biology strand and the correction pass.
 
 This note exists so the next working session can start without re-deriving
 context. It records what is built, what is missing, what is worth double-checking,
@@ -459,6 +460,8 @@ another".
 3. Decide the `content-schema` question in section 7.
 4. Decide whether to compress the new lessons to house prose scale (section 7).
 5. Begin subject-matter review of all 53 lessons, starting with section 5.
+6. Take up the AI-tutor question in section 10 — deliberately deferred, and
+   worth deciding before the offline claims are set in a published listing.
 
 Done since the last note, so no longer on this list: seeing the 28 new diagrams
 in situ inside a lesson rather than only as individual screenshots. They were
@@ -466,3 +469,123 @@ walked on the emulator and all of them paint. What that pass did *not* settle is
 whether each diagram teaches what it should — the open questions in section 5
 about `linkage_map` and `vesicle_traffic` are judgements about the geometry, not
 about whether it renders, and they stand.
+
+## 10. Open product decision — AI tutor as a premium feature
+
+Raised 9 August 2026 and **deliberately deferred**. Nothing was built and no
+decision was made. This section exists so the question does not have to be
+re-derived from scratch.
+
+**The ask.** A paid tier where a learner can discuss their learning with an AI —
+ask for a concept to be explained differently, or work out why a practice check
+went wrong.
+
+### Why this is not a small feature
+
+The offline-and-serverless property is not an implementation detail here. It is
+the app's sharpest differentiator, and it has been asserted in writing in places
+that would all need rewriting:
+
+| Where | What it currently asserts |
+| --- | --- |
+| `docs/PRIVACY_POLICY.md:21` | no server, no account system, no internet connection |
+| `docs/PRIVACY_POLICY.md:29` | "SciPrep collects no data and shares no data" |
+| `docs/PRIVACY_POLICY.md:98` | ships without the `INTERNET` permission, so the OS itself prevents a connection |
+| `docs/PRIVACY_POLICY.md:111-115` | no accounts, **no in-app billing**, **no chat features** — all three denied explicitly |
+| `docs/PRIVACY_POLICY.md:81` | notebook notes: "the app has no network capability with which to send one" |
+| `docs/store/PLAY_DECLARATIONS.md` Part 0 | the whole evidence base — §0.1 no `INTERNET`, §0.6 no accounts/server/payments, §0.7 no fetchable external URL |
+| `docs/store/PLAY_DECLARATIONS.md` §1.1 | Data safety gate question answered **no** |
+| `docs/store/LISTING.md:88-91` | "the app never contacts a server", "no account, no sign-in", "nothing is transmitted" |
+
+These are currently true, not aspirational: `android/app/src/main/AndroidManifest.xml`
+declares **zero** permissions. `docs/PRIVACY_POLICY.md:225` already anticipates a
+change of this kind, so the policy has the hook for it — but the rewrite is real
+work, and the Play Data safety form flips from "collects no data" to "collects
+user content", which is app-level and cannot be scoped to one mode.
+
+### Architecture — only one viable shape
+
+- **On-device model** — preserves the offline promise and nothing else. A model
+  small enough to ship would be 1–4 GB against a 7 MB app and would not be good
+  enough to tutor chemistry. Not viable.
+- **Client calls the Claude API directly** — never. The key ships inside the APK
+  and is trivially extracted.
+- **Thin backend proxy** — the app authenticates to a server that holds the API
+  key, enforces per-user rate limits, and calls the Messages API. The only sane
+  option. The hidden cost is not the code: it moves the project from shipping a
+  static artifact to operating a service, with uptime, key rotation, abuse
+  handling, and a bill that scales with usage.
+
+### Cost model
+
+`claude-opus-5` at $5/M input, $25/M output. Prompt caching fits well, because
+every turn in a lesson conversation shares a stable prefix — system prompt plus
+the lesson text — and cache reads run about 0.1x input. Opus 5's minimum
+cacheable prefix is 512 tokens, low enough that a single lesson's context block
+qualifies.
+
+Per turn, assuming ~2K cached lesson context, ~1.5K live conversation, ~400
+output tokens:
+
+```
+cache read   2,000 x $0.0000005  = $0.0010
+fresh input  1,500 x $0.000005   = $0.0075
+output         400 x $0.000025   = $0.0100
+                                 ~ $0.019/turn
+```
+
+So roughly 2c per turn, about $1.90/month for a learner doing 100 turns. The API
+bill is in USD; a subscription would presumably be priced in GBP, so the margin
+also carries an exchange-rate exposure. At something like £4/month it works only
+with **hard per-user rate limits** — the cost is variable and the subscription is
+not, and a learner doing 1,000 turns/month costs $19 against the same £4.
+
+Every figure above is an order-of-magnitude estimate from assumed token counts.
+Nothing here was measured against a real prompt.
+
+Thinking is on by default on Opus 5 and counts toward both `max_tokens` and cost.
+Sweep `effort` at `low` and `medium` before assuming `high` is needed; on this
+model the lower levels are strong and are the main cost lever.
+
+### Constraints that are not negotiable
+
+- **Google Play requires Play Billing** for digital subscriptions on Android.
+  Roughly 15% at this scale, plus server-side purchase verification — which means
+  a backend is needed for entitlement checks regardless of the AI part.
+- **Play requires a way to report offensive output** from generative-AI features.
+  A build item, not just policy text.
+- **Health and medical policy** — `docs/store/PLAY_DECLARATIONS.md` §2.6 already
+  flags this as the one to read carefully. An unbounded chat attached to a course
+  that teaches physiology will eventually be asked for medical advice.
+
+### Where the feature should be scoped, if it is built
+
+"Discuss their learning" splits into a **tutor** (explain this differently, why
+was my answer wrong) and a **study coach** (open-ended, motivational). Only the
+first is defensible as a paid feature: a generic chatbot is free and already on
+the learner's phone. What it cannot do is see that the learner is on lesson 3.4,
+failed the dipole–dipole check twice, and has not reviewed bonding in three
+weeks. That context already exists in the `sciprep.learner-progress.v1` record.
+
+Scoping it to per-lesson tutoring grounded in lesson content also keeps the AI
+inside material that has at least been through the authors' correctness sweep,
+and gives a natural refusal boundary for the medical-advice risk above.
+
+### What to decide first
+
+1. Whether the offline promise is worth more than the subscription revenue. It
+   is a genuinely rare property and it carries most of the listing's
+   distinctiveness. Keeping the course fully offline and making the tutor an
+   opt-in, account-required mode preserves the user-facing claim, though not the
+   Data safety answer.
+2. Whether there is demand, before building billing, a backend, and the
+   compliance rewrite — that is weeks of work behind a guess.
+3. Write the compliance changes first, not last. They are the honest measure of
+   how much of the app's identity the feature costs.
+
+Considered and not recommended: having learners paste their own API key. It
+sidesteps billing and data handling, but is a non-starter for an audience defined
+as adults with little or no recent science background.
+
+An ADR (`docs/decisions/0002-ai-tutor.md`) was offered and not written, pending
+this discussion.
