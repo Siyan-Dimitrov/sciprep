@@ -274,6 +274,10 @@ assumed. Regenerate with `node scripts/store-graphics.mjs` and
 `node scripts/store-screenshots.mjs`; both scripts re-measure and exit non-zero
 if anything falls outside the Play limits.
 
+The Android launcher icons are generated from the same mark by
+`node scripts/android-icons.mjs`, so the store icon and the on-device icon
+cannot drift apart.
+
 | File | Measured | Channels | Alpha |
 | --- | --- | --- | --- |
 | `icon-512.png` | 512 x 512 | 4 (32-bit) | present, fully opaque |
