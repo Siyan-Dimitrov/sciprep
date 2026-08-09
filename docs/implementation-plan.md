@@ -336,8 +336,7 @@ by writing one lesson module and registering it there. Diagram renderers live in
 `apps/web/components/concept-visual.tsx` and its extended companion; every value
 in the `VisualName` union must have a matching branch.
 
-At the product owner's request, GitHub creation and pushing are deferred. The
-eventual target remains the private `Siyan-Dimitrov/SciPrep` repository.
+The project is published as the public `Siyan-Dimitrov/sciprep` repository.
 
 ## Remaining product questions
 

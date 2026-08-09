@@ -125,7 +125,7 @@ Re-measure after any edit. Save this as `count.js` and run `node count.js`:
 
 ```javascript
 const fs = require("fs");
-const s = fs.readFileSync("C:/Dev/SciPrep/docs/store/LISTING.md", "utf8");
+const s = fs.readFileSync("docs/store/LISTING.md", "utf8");
 const lim = {
   "app-name": 30,
   "short-a": 80,
@@ -252,10 +252,11 @@ Residual risks to accept knowingly:
 - Play's Health and Medical and its Misrepresentation policies both bite on
   education apps that imply exam or career outcomes. The copy makes no outcome
   claim, which is the main defence.
-- "SciPrep" reads as a Scottish graduate-entry-medicine abbreviation and is
-  close to the names of real university programmes. This copy makes no
-  university claim, but the name itself should be trademark-cleared against UK
-  university and NHS marks before launch. That check has not been done.
+- The app was renamed before first release, away from a working title that read
+  as a university programme abbreviation. "SciPrep" makes no institutional
+  reference and is descriptive of the subject. Being descriptive, it is also
+  weak as a mark and may collide with existing ones, so it should still be
+  trademark-cleared before launch. That check has not been done.
 - The unreviewed content status is disclosed in the listing. It should also be
   visible before purchase if the app is ever paid, and the in-app label must not
   be removed while the listing says it is there.
